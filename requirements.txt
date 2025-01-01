@@ -1,0 +1,16 @@
+pyttsx3              # Text-to-speech synthesis
+SpeechRecognition     # Speech-to-text (STT)
+wikipedia-api         # Wikipedia API for information retrieval
+gTTS                  # Google Text-to-Speech API
+requests              # For making HTTP requests to fetch weather, news, etc.
+json                  # For working with JSON data (included in Python standard library)
+threading             # Threading for alarm functionality (included in Python standard library)
+random                # For generating random facts (included in Python standard library)
+os                    # For interacting with the operating system (included in Python standard library)
+datetime              # For working with dates and times (included in Python standard library)
+webbrowser            # For opening websites (included in Python standard library)
+tempfile              # For temporary files (included in Python standard library)
+
+
+
+# pip install -r requirements.txt
