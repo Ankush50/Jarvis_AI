@@ -10,6 +10,7 @@ os                    # For interacting with the operating system (included in P
 datetime              # For working with dates and times (included in Python standard library)
 webbrowser            # For opening websites (included in Python standard library)
 tempfile              # For temporary files (included in Python standard library)
+googletrans           # For language translation
 
 
 
