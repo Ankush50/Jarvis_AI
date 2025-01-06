@@ -3,15 +3,20 @@ import sys
 from modules.tts import speak
 from modules.stt import listen
 from modules.conversation import engage_conversation
+from modules.conversation import chatting
 from modules.command_handler import handle_command
 from modules.translation import translate_text
 import memory
 
-
 def main():
     memory.load_memory()  # Load memory data when the program starts
     user_name = memory.memory.get("user_name", "User")  # Default to "User" if not found
-    speak(f"...Hello, {user_name}. JARVIS activated. You can use either voice or text commands. How can I assist you?")
+    
+    # For male voice, use Jarvis
+    # speak(f"...Hello, {user_name}. JARVIS activated. You can use either voice or text commands. How can I assist you?")
+    
+    # For female voice, use Friday
+    speak(f"...Hello Boss, {user_name} Friday is Online. How can I make your day good?")
 
     while True:
         speak("Would you like to use voice or text input? Say 'voice' or 'text'.")
@@ -26,8 +31,8 @@ def main():
                         process_command(command)
                     else:
                         speak("I didn't catch that. Please try again.")
-                    speak("Say 'exit voice' to switch to text mode.")
-                    if command and "exit voice" in command:
+                    speak("Say 'Switch Mode' to switch to text mode.")
+                    if command and "switch" in command.lower():
                         break
 
             elif "text" in mode:
@@ -57,8 +62,13 @@ def process_command(command):
         speak(f"The translation is: {translated_text}")
         print(f"Translated text: {translated_text}")
 
-    elif "chat" in command or "talk" in command:
-        engage_conversation()
+    elif "chat" in command:
+        # Use `engage_conversation` for advanced conversational AI
+        engage_conversation(command)
+        
+    elif "talk" in command:
+        chatting(command)
+
 
     elif "my name is" in command:
         new_name = command.split("my name is")[-1].strip()

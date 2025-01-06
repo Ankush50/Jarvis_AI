@@ -11,7 +11,7 @@ datetime              # For working with dates and times (included in Python sta
 webbrowser            # For opening websites (included in Python standard library)
 tempfile              # For temporary files (included in Python standard library)
 googletrans           # For language translation
-
-
+openai                # For AI chatbot
+pyaudio               # For audio input/output
 
 # pip install -r requirements.txt

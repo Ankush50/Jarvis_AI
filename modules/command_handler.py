@@ -9,13 +9,15 @@ from modules.wikipedia_utils import search_wikipedia
 from modules.youtube_utils import search_youtube, play_youtube
 from modules.utils import set_alarm, play_game
 from modules.jokes_facts import tell_joke, daily_quote, tell_fact
+from modules.conversation import ai_chat
 import memory
 
 
 
 def handle_command(command):
     if "hello" in command:
-        speak("Hello, I am JARVIS. How can I assist you today?")
+        # speak("Hello, I am JARVIS. How can I assist you today?")
+        speak("Hello, I am Friday. How can I assist you today?")
     elif "my name is" in command:
         name = command.replace("my name is", "").strip()
         memory["name"] = name
@@ -33,7 +35,7 @@ def handle_command(command):
         weather = get_weather(city, api_key)
         if weather:
             speak(f"The weather in {city} is currently {
-                  weather['description']} with a temperature of {weather['temp']}°C.")
+                weather['description']} with a temperature of {weather['temp']}°C.")
         else:
             speak("I'm sorry, I couldn't get the weather information.")
     elif "open google" in command:
@@ -80,6 +82,8 @@ def handle_command(command):
     elif "play game" in command:
         play_game(command)
 
+    elif "talk to AI" in command or "chatbot" in command:
+        ai_chat(command)
 
     else:
         speak("Sorry, I didn't catch that. Please try again.")

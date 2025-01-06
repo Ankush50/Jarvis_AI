@@ -1,4 +1,4 @@
-import modules.tts, wikipediaapi
+import wikipediaapi
 from modules.tts import speak
 
 def search_wikipedia(command):

@@ -12,7 +12,7 @@ def handle_command(command):
         tts.speak(f"The current time is {datetime.now().strftime('%H:%M')}")
     # Add more commands here...
 
-def engage_conversation():
+def chatting():
     speak("Let's have a chat. How are you feeling today?")
 
     while True:
@@ -51,3 +51,36 @@ def follow_up_question(emotion):
 
     question = random.choice(questions)
     speak(question)
+    
+    
+    
+#Open AI GPT-4 conversation model 
+
+from modules.ai_chat import ai_chat
+
+def engage_conversation(command):
+    """Process user commands."""
+    if command.lower().startswith("chat"):
+        # Extract query after "chat"
+        query = command[5:].strip()
+        ai_chat(query)
+    else:
+        # Handle other commands
+        pass
+
+
+# from openai import OpenAI
+
+# client = OpenAI(
+#   api_key="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"
+# )
+
+# completion = client.chat.completions.create(
+#   model="gpt-4o-mini",
+#   store=True,
+#   messages=[
+#     {"role": "user", "content": "write a haiku about ai"}
+#   ]
+# )
+
+# print(completion.choices[0].message);

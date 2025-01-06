@@ -1,4 +1,7 @@
 {
+    "api_keys" : "please add your api keys here, if you want to use the api's in the project jarvis. You can get the api keys from the respective websites",
+
     "weather_api_key": "8df2794fcab292e33b7f615e59cad51b",
-    "news_api_key": "pub_59415a2176d471eb3f4ecb18387abb22c1638"
+    "news_api_key": "pub_59415a2176d471eb3f4ecb18387abb22c1638",
+    "openai_api_key": "Add your openai api key at conversation.py --> clint.api_key"
 }
