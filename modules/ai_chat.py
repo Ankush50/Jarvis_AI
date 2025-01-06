@@ -14,7 +14,7 @@ def ai_chat(command):
     """Chat with OpenAI API and speak the response."""
     try:
         # Set up OpenAI API key securely, you have to add you api key.
-        # openai.api_key = "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"
+        # openai.api_key = "api-key"
         # Call OpenAI API
         response = openai.Completion.create(
             model="gpt-4o-mini",
