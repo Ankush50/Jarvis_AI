@@ -67,20 +67,3 @@ def engage_conversation(command):
     else:
         # Handle other commands
         pass
-
-
-# from openai import OpenAI
-
-# client = OpenAI(
-#   api_key="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"
-# )
-
-# completion = client.chat.completions.create(
-#   model="gpt-4o-mini",
-#   store=True,
-#   messages=[
-#     {"role": "user", "content": "write a haiku about ai"}
-#   ]
-# )
-
-# print(completion.choices[0].message);
