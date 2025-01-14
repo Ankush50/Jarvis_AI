@@ -21,7 +21,7 @@ class JarvisApp(QWidget):
         # AI Visual
         self.ai_visual = QLabel(self)
         self.ai_visual.setAlignment(Qt.AlignCenter)
-        movie = QMovie("ai_visual")  # Replace with the correct GIF file path
+        movie = QMovie("ai_visuals")  # Replace with the correct GIF file path
         if movie.isValid():  # Check if GIF is valid
             self.ai_visual.setMovie(movie)
             movie.start()
