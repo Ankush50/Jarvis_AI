@@ -15,75 +15,120 @@ import memory
 
 
 def handle_command(command):
-    if "hello" in command:
-        # speak("Hello, I am JARVIS. How can I assist you today?")
-        speak("Hello, I am Friday. How can I assist you today?")
-    elif "my name is" in command:
-        name = command.replace("my name is", "").strip()
-        memory["name"] = name
-        speak(f"Nice to meet you, {name}!")
-    elif "time" in command:
-        current_time = datetime.datetime.now().strftime("%H:%M")
-        speak(f"The current time is {current_time}")
-    elif "date" in command:
-        current_date = datetime.datetime.now().strftime("%Y-%m-%d")
-        speak(f"Today’s date is {current_date}")
-    elif "weather" in command:
-        # You need to replace this with a real API key
-        api_key = "e34b7e8319b74d23b04132656240612"
-        city = command.replace("weather in", "").strip()
-        weather = get_weather(city, api_key)
-        if weather:
-            speak(f"The weather in {city} is currently {
-                weather['description']} with a temperature of {weather['temp']}°C.")
+    """
+    Processes user commands and returns a string response or executes a task.
+    """
+    try:
+        # Handle invalid or empty commands
+        if not command or not isinstance(command, str):
+            return "I'm sorry, I didn't receive a valid command."
+
+        command = command.lower()
+
+        if "hello" in command:
+            response = "Hello! How can I assist you today?"
+            speak(response)
+            return response
+
+        elif "what's your name" in command:
+            response = "I am JARVIS, your personal AI assistant."
+            speak(response)
+            return response
+
+        elif "my name is" in command:
+            name = command.replace("my name is", "").strip()
+            memory["name"] = name
+            response = f"Nice to meet you, {name}!"
+            speak(response)
+            return response
+
+        elif "time" in command:
+            current_time = datetime.datetime.now().strftime("%H:%M")
+            response = f"The current time is {current_time}."
+            speak(response)
+            return response
+
+        elif "date" in command:
+            current_date = datetime.datetime.now().strftime("%Y-%m-%d")
+            response = f"Today's date is {current_date}."
+            speak(response)
+            return response
+
+        elif "weather" in command:
+            api_key = "e34b7e8319b74d23b04132656240612"  # Replace with your real API key
+            city = command.replace("weather in", "").strip()
+            weather = get_weather(city, api_key)
+            if weather:
+                response = f"The weather in {city} is currently {weather['description']} with a temperature of {weather['temp']}°C."
+                speak(response)
+                return response
+            else:
+                response = "I'm sorry, I couldn't get the weather information."
+                speak(response)
+                return response
+
+        elif "open google" in command:
+            webbrowser.open("https://www.google.com")
+            response = "Opening Google."
+            speak(response)
+            return response
+
+        elif "open youtube" in command:
+            webbrowser.open("https://www.youtube.com")
+            response = "Opening YouTube."
+            speak(response)
+            return response
+
+        elif "search wikipedia" in command or "about" in command:
+            return search_wikipedia(command)
+
+        elif "play" in command and ("song" in command or "video" in command):
+            return play_youtube(command)
+
+        elif "search youtube" in command:
+            search_query = command.replace("search youtube", "").strip()
+            return search_youtube(search_query)
+
+        elif "exit" in command or "stop" in command:
+            response = "Goodbye! Have a great day!"
+            speak(response)
+            # Save memory or perform cleanup before exiting
+            exit()
+
+        elif "open" in command:
+            if "website" in command or "browser" in command:
+                return open_website(command)
+            else:
+                return open_application(command)
+
+        elif "tell me a fact" in command:
+            return tell_fact()
+
+        elif "set alarm for" in command:
+            return set_alarm(command)
+
+        elif "news" in command or "headlines" in command:
+            return get_news()
+
+        elif "tell me a joke" in command:
+            return tell_joke()
+
+        elif "motivate me" in command or "daily quote" in command:
+            return daily_quote()
+
+        elif "play game" in command:
+            return play_game(command)
+
+        elif "talk to AI" in command or "chatbot" in command:
+            return ai_chat(command)
+
         else:
-            speak("I'm sorry, I couldn't get the weather information.")
-    elif "open google" in command:
-        webbrowser.open("https://www.google.com")
-        speak("Opening Google")
-    elif "open youtube" in command:
-        webbrowser.open("https://www.youtube.com")
-        speak("Opening YouTube")
-    elif "search wikipedia" in command or "about" in command:
-        search_wikipedia(command)
-    elif "play" in command and ("song" in command or "video" in command):
-        play_youtube(command)
+            response = "I'm sorry, I didn't understand that."
+            speak(response)
+            return response
 
-    elif "search youtube" in command:
-        search_query = command.replace("search youtube", "").strip()
-        search_youtube(search_query)
-
-    elif "exit" in command or "stop" in command:
-        speak("Goodbye! Sir.")
-        # Save memory data before exiting
-        exit()
-    elif "open" in command:
-        if "website" in command or "browser" in command:
-            open_website(command)
-        else:
-            open_application(command)
-
-    elif "tell me a fact" in command:
-        tell_fact()
-
-
-    elif "set alarm for" in command:
-        set_alarm(command)
-
-    elif "news" in command or "headlines" in command:
-        get_news()
-
-    elif "tell me a joke" in command:
-        tell_joke()
-
-    elif "motivate me" in command or "daily quote" in command:
-        daily_quote()
-        
-    elif "play game" in command:
-        play_game(command)
-
-    elif "talk to AI" in command or "chatbot" in command:
-        ai_chat(command)
-
-    else:
-        speak("Sorry, I didn't catch that. Please try again.")
+    except Exception as e:
+        # Handle unexpected errors gracefully
+        error_message = f"An error occurred: {str(e)}"
+        speak(error_message)
+        return error_message
